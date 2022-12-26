@@ -3,4 +3,10 @@
      <tree path="/chapter1/src/main/java/nia/chapter1/BlockingIoExample.java" title="p4" extension="java"/>
      <tree path="/chapter1/src/main/java/nia/chapter1/ConnectHandler.java" title="p10" extension="java"/>
      <tree path="/chapter1/src/main/java/nia/chapter1/ConnectExample.java" title="p11" extension="java"/>
+     <tree path="/chapter2/Server/src/main/java/nia/chapter2/echoserver/EchoServer.java" title="p19" extension="java"/>
+     <tree path="/chapter2/Server/src/main/java/nia/chapter2/echoserver/EchoServerHandler.java" title="p17"
+           extension="java"/>
+     <tree path="/chapter2/Client/src/main/java/nia/chapter2/echoclient/EchoClientHandler.java" title="p21"
+           extension="java"/>
+     <tree path="/chapter2/Client/src/main/java/nia/chapter2/echoclient/EchoClient.java" title="p23" extension="java"/>
  </trees>
