@@ -9,4 +9,9 @@
      <tree path="/chapter2/Client/src/main/java/nia/chapter2/echoclient/EchoClientHandler.java" title="p21"
            extension="java"/>
      <tree path="/chapter2/Client/src/main/java/nia/chapter2/echoclient/EchoClient.java" title="p23" extension="java"/>
- </trees>
+     <tree path="/chapter4/src/main/java/nia/chapter4/PlainOioServer.java" title="p39" extension="java"/>
+     <tree path="/chapter4/src/main/java/nia/chapter4/PlainNioServer.java" title="p40" extension="java"/>
+    <tree path="/chapter4/src/main/java/nia/chapter4/NettyOioServer.java" title="p41" extension="java"/>
+    <tree path="/chapter4/src/main/java/nia/chapter4/NettyNioServer.java" title="p42" extension="java"/>
+    <tree path="/chapter4/src/main/java/nia/chapter4/ChannelOperationExamples.java" title="p44-45" extension="java"/>
+</trees>

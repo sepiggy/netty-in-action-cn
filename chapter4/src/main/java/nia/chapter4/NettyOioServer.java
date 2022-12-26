@@ -17,46 +17,51 @@ import java.nio.charset.Charset;
  * @author <a href="mailto:norman.maurer@gmail.com">Norman Maurer</a>
  */
 public class NettyOioServer {
-    public void server(int port)
-            throws Exception {
-        final ByteBuf buf =
-                Unpooled.unreleasableBuffer(Unpooled.copiedBuffer("Hi!\r\n", Charset.forName("UTF-8")));
+
+    public static void main(String[] args) {
+        try {
+            new NettyOioServer().server(8080);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void server(int port) throws Exception {
+        final ByteBuf buf = Unpooled.unreleasableBuffer(Unpooled.copiedBuffer("Hi!\r\n", Charset.forName("UTF-8")));
         EventLoopGroup group = new OioEventLoopGroup();
         try {
-            //创建 ServerBootstrap
+            // 创建ServerBootstrap
             ServerBootstrap b = new ServerBootstrap();
             b.group(group)
-                    //使用 OioEventLoopGroup以允许阻塞模式（旧的I/O）
+                    // 使用OioEventLoopGroup以允许阻塞模式（旧的I/O）
                     .channel(OioServerSocketChannel.class)
                     .localAddress(new InetSocketAddress(port))
-                    //指定 ChannelInitializer，对于每个已接受的连接都调用它
+                    // 指定ChannelInitializer，对于每个已接受的连接都调用它
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
-                        public void initChannel(SocketChannel ch)
-                                throws Exception {
-                                ch.pipeline().addLast(
-                                    //添加一个 ChannelInboundHandlerAdapter以拦截和处理事件
+                        public void initChannel(SocketChannel ch) throws Exception {
+                            ch.pipeline().addLast(
+                                    // 添加一个ChannelInboundHandlerAdapter以拦截和处理事件
                                     new ChannelInboundHandlerAdapter() {
                                         @Override
-                                        public void channelActive(
-                                                ChannelHandlerContext ctx)
-                                                throws Exception {
+                                        public void channelActive(ChannelHandlerContext ctx) throws Exception {
                                             ctx.writeAndFlush(buf.duplicate())
                                                     .addListener(
-                                                            //将消息写到客户端，并添加 ChannelFutureListener，
-                                                            //以便消息一被写完就关闭连接
+                                                            // 将消息写到客户端，并添加ChannelFutureListener，
+                                                            // 以便消息一被写完就关闭连接
                                                             ChannelFutureListener.CLOSE);
                                         }
                                     });
                         }
                     });
-            //绑定服务器以接受连接
+            // 绑定服务器以接受连接
             ChannelFuture f = b.bind().sync();
             f.channel().closeFuture().sync();
         } finally {
-            //释放所有的资源
+            // 释放所有的资源
             group.shutdownGracefully().sync();
         }
     }
+
 }
 
